@@ -6,7 +6,6 @@ DOMAIN,api.themoviedb.org
 DOMAIN,api.thetvdb.com
 DOMAIN,api.tmdb.org
 DOMAIN,api.viu.now.com
-DOMAIN,apk.tw
 DOMAIN,app.bluestacks.cn
 DOMAIN,assets.fanart.tv
 DOMAIN,assets.hcaptcha.com
@@ -43,7 +42,6 @@ DOMAIN,d1q6f0aelx0por.cloudfront.net
 DOMAIN,d2anahhhmp1ffz.cloudfront.net
 DOMAIN,d2wy8f7a9ursnm.cloudfront.net
 DOMAIN,d36jcksde1wxzq.cloudfront.net
-DOMAIN,d3c7rimkq79yfu.cloudfront.net
 DOMAIN,d3fzqoxno61m61.txfdzgn.cc
 DOMAIN,defi.swft.pro
 DOMAIN,dfp6rglgjqszk.cloudfront.net
@@ -63,7 +61,6 @@ DOMAIN,fm.dl.126.net
 DOMAIN,forums.unraid.net
 DOMAIN,free.gpt.ge
 DOMAIN,global.ssl.fastly.net
-DOMAIN,hcaptcha.com
 DOMAIN,hikdownload.ys7.com
 DOMAIN,hub.docker.com
 DOMAIN,i60.tinypic.com
@@ -96,7 +93,6 @@ DOMAIN,registry.docker.io
 DOMAIN,registry.hub.docker.com
 DOMAIN,registry.k8s.io
 DOMAIN,registry-1.docker.io
-DOMAIN,remaker.ai
 DOMAIN,s3-ap-southeast-1.amazonaws.com
 DOMAIN,shadowrocket.v2cross.com
 DOMAIN,sketch.metademolab.com
@@ -116,7 +112,6 @@ DOMAIN,update2.filseclab.com
 DOMAIN,url.kutumu.top
 DOMAIN,users.nexusmods.com
 DOMAIN,v10.downloadhelper.net
-DOMAIN,videodelivery.net
 DOMAIN,videos-f.jwpsrv.com
 DOMAIN,voidtools.com
 DOMAIN,web.nicecat.cc
@@ -586,6 +581,17 @@ DOMAIN-SUFFIX,settings.crashlytics.com
 DOMAIN-SUFFIX,shanaproject.com
 DOMAIN-SUFFIX,siam.org
 DOMAIN-SUFFIX,sittingonclouds.net
+DOMAIN-SUFFIX,slack.com
+DOMAIN-SUFFIX,slackb.com
+DOMAIN-SUFFIX,slackcertified.com
+DOMAIN-SUFFIX,slack-core.com
+DOMAIN-SUFFIX,slackdemo.com
+DOMAIN-SUFFIX,slack-edge.com
+DOMAIN-SUFFIX,slack-files.com
+DOMAIN-SUFFIX,slackhq.com
+DOMAIN-SUFFIX,slack-imgs.com
+DOMAIN-SUFFIX,slack-msgs.com
+DOMAIN-SUFFIX,slack-redir.net
 DOMAIN-SUFFIX,smartmailcloud.com
 DOMAIN-SUFFIX,snapsave.app
 DOMAIN-SUFFIX,snapsave.io
@@ -694,4 +700,3 @@ DOMAIN-SUFFIX,yout.com
 DOMAIN-SUFFIX,youtube4kdownloader.com
 DOMAIN-SUFFIX,z-library.la
 DOMAIN-SUFFIX,zmk.pw
-DOMAIN-KEYWORD,slack

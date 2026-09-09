@@ -37,7 +37,6 @@ DOMAIN,ipv6.rer.lol
 DOMAIN,isk.richardsw.club
 DOMAIN,martin-gebhardt.eu
 DOMAIN,msxui.canxi.me
-DOMAIN,musicbrainz.org
 DOMAIN,ns3109441.mypdns.org
 DOMAIN,open.demonii.com
 DOMAIN,open.dstud.io
@@ -496,7 +495,3 @@ DOMAIN-SUFFIX,zmzapi.com
 DOMAIN-SUFFIX,zmzapi.net
 DOMAIN-SUFFIX,zmzfile.com
 DOMAIN-SUFFIX,zprk.io
-DOMAIN-KEYWORD,gitee
-DOMAIN-KEYWORD,gitlab
-DOMAIN-KEYWORD,lanzou
-DOMAIN-KEYWORD,xianyudanji
