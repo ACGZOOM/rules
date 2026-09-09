@@ -1,6 +1,6 @@
 # MRS Ruleset Links (Always Latest)
 
-Generated at: 2026-09-09 15:05:57+00:00
+Generated at: 2026-09-09 17:07:16+00:00
 
 ```yaml
 - RULE-SET,fakeip-filter_domain,⚡ 绕过
@@ -22,9 +22,9 @@ Generated at: 2026-09-09 15:05:57+00:00
 - RULE-SET,SwitchProxy_other,🐬 切换代理
 - RULE-SET,SpecialProxy_domain,✨ 特殊代理
 - RULE-SET,CustomProxy_domain,🚁 自用代理
-- RULE-SET,ProxyMedia_domain,🚀 默认代理
-- RULE-SET,ProxyMedia_ipcidr,🚀 默认代理
-- RULE-SET,ProxyMedia_other,🚀 默认代理
+- RULE-SET,ProxyMedia_domain,▶️ ProxyMedia
+- RULE-SET,ProxyMedia_ipcidr,▶️ ProxyMedia
+- RULE-SET,ProxyMedia_other,▶️ ProxyMedia
 - RULE-SET,Custom_Proxy_domain,🚀 国外流量
 - RULE-SET,Custom_Proxy_ipcidr,🚀 国外流量
 - RULE-SET,GitHub_domain,👨‍💻 GitHub
