@@ -1,11 +1,12 @@
 # MRS Ruleset Links (Always Latest)
 
-Generated at: 2026-09-09 14:51:22+00:00
+Generated at: 2026-09-09 15:05:57+00:00
 
 ```yaml
 - RULE-SET,fakeip-filter_domain,⚡ 绕过
 - RULE-SET,PrivateTracker_domain,⚡ 绕过
 - RULE-SET,PrivateTracker_ipcidr,⚡ 绕过
+- RULE-SET,KeywordDirect_other,⚡ 绕过
 - RULE-SET,BanAD_domain,🕳️ 黑洞
 - RULE-SET,BanAD_other,🕳️ 黑洞
 - RULE-SET,BanProgramAD_domain,🕳️ 黑洞
