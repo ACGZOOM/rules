@@ -1,12 +1,11 @@
 # MRS Ruleset Links (Always Latest)
 
-Generated at: 2026-09-09 13:33:50+00:00
+Generated at: 2026-09-09 14:51:22+00:00
 
 ```yaml
 - RULE-SET,fakeip-filter_domain,⚡ 绕过
 - RULE-SET,PrivateTracker_domain,⚡ 绕过
 - RULE-SET,PrivateTracker_ipcidr,⚡ 绕过
-- RULE-SET,PrivateTracker_other,⚡ 绕过
 - RULE-SET,BanAD_domain,🕳️ 黑洞
 - RULE-SET,BanAD_other,🕳️ 黑洞
 - RULE-SET,BanProgramAD_domain,🕳️ 黑洞
@@ -18,12 +17,10 @@ Generated at: 2026-09-09 13:33:50+00:00
 - RULE-SET,JOOX_domain,🎧 MusicStreaming
 - RULE-SET,JOOX_other,🎧 MusicStreaming
 - RULE-SET,CustomlDirect_domain,⚡ 绕过
-- RULE-SET,CustomlDirect_other,⚡ 绕过
 - RULE-SET,SwitchProxy_domain,🐬 切换代理
 - RULE-SET,SwitchProxy_other,🐬 切换代理
 - RULE-SET,SpecialProxy_domain,✨ 特殊代理
 - RULE-SET,CustomProxy_domain,🚁 自用代理
-- RULE-SET,CustomProxy_other,🚁 自用代理
 - RULE-SET,ProxyMedia_domain,🚀 默认代理
 - RULE-SET,ProxyMedia_ipcidr,🚀 默认代理
 - RULE-SET,ProxyMedia_other,🚀 默认代理
