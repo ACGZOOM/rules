@@ -13,40 +13,31 @@ jobs:
       contents: write # 授予 action 修改仓库内容的权限
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5  # 从 v4 升级到 v5
+        uses: actions/checkout@v5
         with:
-          fetch-depth: 0 # Fetch all history for all tags, so we can count previous runs on the same day.
+          fetch-depth: 0
       - name: Install dependencies (jq, curl, wget)
         run: sudo apt-get update && sudo apt-get install -y jq curl wget
       - name: Install Mihomo
         run: |
-          # 增加版本选择的健壮性，优先选择 compatible 版本
           MIHOMO_LATEST_URL=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest" | jq -r '.assets[] | select(.name | contains("linux-amd64-compatible")) | .browser_download_url')
-          
-          # 如果没有 compatible 版本，则选择一个通用的版本作为备用
           if [ -z "$MIHOMO_LATEST_URL" ]; then
             MIHOMO_LATEST_URL=$(curl -s "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest" | jq -r '[.assets[] | select(.name | contains("linux-amd64") and endswith(".gz"))] | .[0].browser_download_url')
           fi
           echo "Downloading Mihomo from $MIHOMO_LATEST_URL"
-          
-          # 下载、解压、赋予执行权限并移动到系统路径
           wget -qO mihomo.gz "$MIHOMO_LATEST_URL"
           gunzip mihomo.gz
           chmod +x mihomo
           sudo mv mihomo /usr/local/bin/
-          
-          # 验证安装成功
           echo "Mihomo version:"
           mihomo -v
       - name: Process and Convert Rules
         id: process_rules
         run: |
-          set -e # 如果任何命令失败，则立即退出
+          set -e
           # --- 全局变量和初始化 ---
-          # 创建临时目录
           DOWNLOADS_DIR="downloads_tmp"
           mkdir -p "$DOWNLOADS_DIR"
-          # 创建版本化输出目录
           DATE_SUFFIX=$(date -u +"%Y-%m-%d")
           RUN_COUNT=$(git tag -l "${DATE_SUFFIX}-*" | wc -l)
           VERSION_TAG="${DATE_SUFFIX}-${RUN_COUNT}"
@@ -54,18 +45,15 @@ jobs:
           RULES_OUTPUT_DIR="$VERSIONED_OUTPUT_DIR/rules"
           mkdir -p "$RULES_OUTPUT_DIR"
           
-          # 临时文件，用于存储最终配置文件的各个部分
           PROVIDER_LINES_TMP="provider_lines.tmp"
           RULESET_LINES_TMP="ruleset_lines.tmp"
           > "$PROVIDER_LINES_TMP"
           > "$RULESET_LINES_TMP"
-          # 运行摘要计数器
           declare -i total_processed=0
           declare -i total_succeeded=0
           declare -i total_failed=0
           declare -i total_skipped=0
           # --- 函数定义 ---
-          # 函数：转换规则并记录结果
           convert_and_commit_rule() {
               local type="$1"
               local format="$2"
@@ -82,6 +70,7 @@ jobs:
                   url_path+=".list"
                   cp "$input_file" "$output_file"
                   echo "  Archived unsupported rules to ${output_file}"
+                  echo "  [调试] classical 输出行数: $(wc -l < "$output_file")"
                   success=true
               else
                   local output_file="$output_dir/${base_name}.mrs"
@@ -89,11 +78,13 @@ jobs:
                   local input_for_mihomo="$input_file"
                   local temp_clean_input="cleaned_for_mrs.tmp"
                   if [[ "$format" == "text" ]]; then
-                      # 仅处理 domain 类的标准格式：
-                      # DOMAIN-SUFFIX → +.xxx（后缀匹配）
-                      # DOMAIN → 纯域名（精确匹配）
+                      # 预处理：去除行内注释、空行，按 MRS 标准格式输出
                       awk -F, '
                           !/^#/ && !/^[ \t\r\n]*$/ {
+                              # 去除行内注释
+                              sub(/#.*/, "", $0);
+                              # 去除首尾空格
+                              gsub(/^[ \t]+|[ \t]+$/, "", $0);
                               if (NF > 1) {
                                   prefix = toupper($1);
                                   gsub(/^[ \t]+|[ \t]+$/, "", prefix);
@@ -104,20 +95,26 @@ jobs:
                                   } else if (prefix == "DOMAIN") {
                                       print value;
                                   } else {
-                                      # 理论上不会走到这里，非 domain 类已在拆分阶段过滤
                                       print value;
                                   }
                               } else {
-                                  # 不带前缀的行默认按精确域名处理
                                   print $0;
                               }
                           }
                       ' "$input_file" > "$temp_clean_input"
                       input_for_mihomo="$temp_clean_input"
+                      echo "  [调试] 预处理后输入行数: $(wc -l < "$temp_clean_input")"
                   fi
                   echo "  Converting: Type=${type}, Format=${format}"
                   if mihomo convert-ruleset "$type" "$format" "$input_for_mihomo" "$output_file"; then
                       echo "  Successfully ran mihomo conversion."
+                      # 反向转换校验行数
+                      local verify_file="verify_tmp.txt"
+                      mihomo convert-ruleset "$type" mrs "$output_file" "$verify_file" 2>/dev/null || true
+                      if [ -f "$verify_file" ]; then
+                          echo "  [调试] 反向转换后行数: $(wc -l < "$verify_file")"
+                          rm -f "$verify_file"
+                      fi
                       success=true
                   else
                       echo "  Error: Mihomo command failed for ${input_file}."
@@ -138,14 +135,14 @@ jobs:
                   total_failed+=1
               fi
           }
-          # 【已更新】函数：拆分 .list/.txt 或已解析的 .yaml 文件并转换
           split_and_convert() {
               local input_file="$1"
               local base_name="$2"
               local output_dir="$3"
               local original_name_with_emoji="$4"
-              local file_type="$5" # "yaml" or "text"
+              local file_type="$5"
               echo "  Splitting ${file_type} file into domain/ipcidr/other..."
+              echo "  [调试] 源文件有效行数: $(grep -v '^#' "$input_file" | grep -v '^[[:space:]]*$' | wc -l)"
               
               local domain_file="${base_name}_domain.txt"
               local ipcidr_file="${base_name}_ipcidr.txt"
@@ -158,34 +155,39 @@ jobs:
                       sub(/[ \t\r\n]+$/, "", s);
                       return s;
                   }
-                  # 主逻辑
                   {
                       line = strip($0);
+                      # 跳过空行和注释
+                      if (line == "" || substr(line, 1, 1) == "#") next;
+                      # 去除行内注释
+                      sub(/#.*/, "", line);
+                      line = strip(line);
                       if (index(line, ",")) {
                           prefix = toupper(substr(line, 1, index(line, ",") - 1));
                           prefix = strip(prefix);
-                          # 仅 DOMAIN 和 DOMAIN-SUFFIX 进入 domain 类
                           if (prefix == "DOMAIN" || prefix == "DOMAIN-SUFFIX") {
                               print line >> "'"$domain_file"'";
                           } else if (prefix == "IP-CIDR" || prefix == "IP-CIDR6") {
                               print line >> "'"$ipcidr_file"'";
                           } else {
-                              # DOMAIN-KEYWORD、PROCESS-NAME 等所有其他类型，全部归入 classical
                               print line >> "'"$other_file"'";
                           }
                       } else {
-                          # 不带逗号的行默认按纯域名精确匹配，归入 domain
                           print line >> "'"$domain_file"'";
                       }
                   }
               '
               
               if [[ "$file_type" == "yaml" ]]; then
-                  # 从 payload: 开始解析，并移除 yaml 的 list 格式
                   sed -n '/payload:/,$p' "$input_file" | sed -e '1d' -e "s/^[ \t-]*'//;s/'$//" -e 's/^[ \t-]*"//;s/"$//' -e 's/^[ \t-]*//' | awk "$awk_script"
-              else # text
-                  awk '!/^#/ && !/^[ \t\r\n]*$/' "$input_file" | awk "$awk_script"
+              else
+                  awk "$awk_script" "$input_file"
               fi
+              
+              echo "  [调试] 拆分后 domain 行数: $(wc -l < "$domain_file")"
+              echo "  [调试] 拆分后 ipcidr 行数: $(wc -l < "$ipcidr_file")"
+              echo "  [调试] 拆分后 other 行数: $(wc -l < "$other_file")"
+              
               if [ -s "$domain_file" ]; then
                   convert_and_commit_rule "domain" "text" "$domain_file" "${base_name}_domain" "$output_dir" "${original_name_with_emoji}"
               fi
@@ -198,7 +200,6 @@ jobs:
               
               rm -f "$domain_file" "$ipcidr_file" "$other_file"
           }
-          # 函数：处理单个规则
           process_rule() {
               local original_name="$1"
               local url="$2"
@@ -225,7 +226,6 @@ jobs:
                   echo "  Warning: Downloaded file is empty, skipping processing."
                   return
               fi
-              # 【已更新】对所有文件类型都使用拆分逻辑
               if [[ "$extension" == "yaml" ]]; then
                   split_and_convert "$downloaded_file" "$sanitized_filename_base" "$RULES_OUTPUT_DIR" "$original_name" "yaml"
               elif [[ "$extension" == "txt" || "$extension" == "list" ]]; then
@@ -236,15 +236,12 @@ jobs:
               fi
           }
           # --- 主逻辑 ---
-          
-          # 如果 rule_sources.txt 存在，则处理它
           if [ -s "rule_sources.txt" ]; then
               echo "Custom 'rule_sources.txt' found, processing it."
               while IFS= read -r line; do
                   line=$(echo "$line" | tr -d '\r' | xargs)
                   if [ -z "$line" ]; then continue; fi
                   
-                  # 智能解析：同时支持 ini 格式和纯 URL 格式
                   if [[ "$line" == *"ruleset="* ]]; then
                       line_content=$(echo "$line" | sed -e 's/^\s*ruleset=//' -e 's/clash-classic://')
                       url=$(echo "$line_content" | sed -e 's/.*,//' -e 's/^[ \t]*//' -e 's/[ \t]*$//')
@@ -260,14 +257,12 @@ jobs:
               done < rule_sources.txt
           fi
           
-          # 现在总是处理默认的 .ini 文件
           echo "Processing default .ini file."
           INI_URL="https://raw.githubusercontent.com/cutethotw/ClashRule/main/GeneralClashRule.ini"
           INI_FILE="$DOWNLOADS_DIR/GeneralClashRule.ini"
           if ! curl -L --fail -s -o "$INI_FILE" "$INI_URL"; then
               echo "WARNING: Could not download the main .ini file. Skipping."
           else
-              # 使用进程替换 <(...) 来避免子shell问题
               while IFS= read -r line; do
                   line_content=$(echo "$line" | tr -d '\r' | sed -e 's/^\s*ruleset=//' -e 's/clash-classic://')
                   url=$(echo "$line_content" | sed -e 's/.*,//' -e 's/^[ \t]*//' -e 's/[ \t]*$//')
@@ -276,7 +271,6 @@ jobs:
                       echo "  Warning: Could not extract a valid URL from line: '$line'. Skipping."
                       continue
                   fi
-                  
                   process_rule "$original_name" "$url"
               done < <(grep -E '^\s*ruleset=' "$INI_FILE" || true)
           fi
@@ -319,19 +313,15 @@ jobs:
           mkdir -p "$LATEST_DIR"
           echo "Copying latest rules to /$LATEST_DIR directory..."
           if [ -n "$(ls -A $RULES_OUTPUT_DIR 2>/dev/null)" ]; then
-              # 【已更新】使用 -f (force) 标志作为双重保险，确保强制覆盖
               cp -rf "$RULES_OUTPUT_DIR"/* "$LATEST_DIR/"
           else
               echo "No new rule files were generated, skipping copy to latest."
           fi
-          # 【已更新】使用 -f (force) 标志作为双重保险
           cp -f "$PROVIDER_CONFIG_PATH" "$LATEST_DIR/provider_config.yaml"
-          # --- 将最新的 provider_config.yaml 复制到根目录 ---
           echo "Copying latest provider_config.yaml to root directory..."
           cp -f "$LATEST_DIR/provider_config.yaml" ./provider_config.yaml
-          # 【已更新】将版本标签导出到 GITHUB_ENV 供下一步使用
           echo "COMMIT_MSG=feat(rules): Auto update MRS rulesets to version $VERSION_TAG" >> $GITHUB_ENV
-          echo "VERSION_TAG=${VERSION_TAG}" >> "$GITHUB_ENV"
+          echo "VERSION_TAG=${VERSION_TAG}" >> $GITHUB_ENV
           git tag "$VERSION_TAG"
           # --- 打印运行摘要 ---
           echo "--- Run Summary ---"
@@ -346,7 +336,6 @@ jobs:
           
           git add Geo/ Archived/ mrs_rules.md provider_config.yaml
           
-          # 【已更新】总是推送标签，以确保即使没有文件更改，运行计数也能正确增加
           echo "Pushing tag ${{ env.VERSION_TAG }} to ensure run count is updated..."
           git push origin "refs/tags/${{ env.VERSION_TAG }}"
           
