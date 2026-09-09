@@ -1,3 +1,4 @@
+DOMAIN-KEYWORD,nicegram
 PROCESS-NAME,Telegram.exe
 PROCESS-NAME,nekox.messenger
 PROCESS-NAME,org.telegram.messenger

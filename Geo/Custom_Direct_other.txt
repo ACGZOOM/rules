@@ -7,3 +7,4 @@ PROCESS-NAME,ToDesk_RemoteAssistance.exe
 PROCESS-NAME,ToDesk_Setup.exe
 PROCESS-NAME,ToDesk
 PROCESS-NAME,todesk
+DOMAIN-KEYWORD,tagss

@@ -8,6 +8,7 @@ PROCESS-NAME,uTorrent.exe
 PROCESS-NAME,WebTorrent.exe
 PROCESS-NAME,WebTorrent Helper.exe
 PROCESS-NAME,qbittorrent.exe
+DOMAIN-KEYWORD,aria2
 URL-REGEX,(Subject|HELO|SMTP)
 URL-REGEX,(api|ps|sv|offnavi|newvector|ulog.imap|newloc)(.map|).(baidu|n.shifen).com
 URL-REGEX,(.+.|^)(360|so|qihoo|360safe|qhimg|360totalsecurity|yunpan).(cn|com)

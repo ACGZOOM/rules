@@ -1,28 +1,36 @@
 # MRS Ruleset Links (Always Latest)
 
-Generated at: 2026-09-09 05:40:02+00:00
+Generated at: 2026-09-09 10:39:11+00:00
 
 ```yaml
 - RULE-SET,fakeip-filter_domain,⚡ 绕过
 - RULE-SET,PrivateTracker_domain,⚡ 绕过
 - RULE-SET,PrivateTracker_ipcidr,⚡ 绕过
+- RULE-SET,PrivateTracker_other,⚡ 绕过
 - RULE-SET,BanAD_domain,🕳️ 黑洞
+- RULE-SET,BanAD_other,🕳️ 黑洞
 - RULE-SET,BanProgramAD_domain,🕳️ 黑洞
 - RULE-SET,BanProgramAD_ipcidr,🕳️ 黑洞
+- RULE-SET,BanProgramAD_other,🕳️ 黑洞
 - RULE-SET,SteamRegionCheck_domain,🖥️ Steam
 - RULE-SET,Qobuz_domain,🎧 MusicStreaming
 - RULE-SET,YouTubeMusic_domain,🎧 MusicStreaming
 - RULE-SET,JOOX_domain,🎧 MusicStreaming
+- RULE-SET,JOOX_other,🎧 MusicStreaming
 - RULE-SET,CustomlDirect_domain,⚡ 绕过
+- RULE-SET,CustomlDirect_other,⚡ 绕过
 - RULE-SET,SwitchProxy_domain,🐬 切换代理
+- RULE-SET,SwitchProxy_other,🐬 切换代理
 - RULE-SET,SpecialProxy_domain,✨ 特殊代理
 - RULE-SET,CustomProxy_domain,🚁 自用代理
+- RULE-SET,CustomProxy_other,🚁 自用代理
 - RULE-SET,ProxyMedia_domain,🚀 默认代理
 - RULE-SET,ProxyMedia_ipcidr,🚀 默认代理
 - RULE-SET,ProxyMedia_other,🚀 默认代理
 - RULE-SET,Custom_Proxy_domain,🚀 国外流量
 - RULE-SET,Custom_Proxy_ipcidr,🚀 国外流量
 - RULE-SET,GitHub_domain,👨‍💻 GitHub
+- RULE-SET,GitHub_other,👨‍💻 GitHub
 - RULE-SET,Claude_domain,🧚 AI
 - RULE-SET,Claude_ipcidr,🧚 AI
 - RULE-SET,Claude_other,🧚 AI
@@ -37,12 +45,15 @@ Generated at: 2026-09-09 05:40:02+00:00
 - RULE-SET,Lan_ipcidr,🎯 国内流量
 - RULE-SET,UnBan_domain,🎯 国内流量
 - RULE-SET,PikPak_domain,🚀 国外流量
+- RULE-SET,PikPak_other,🚀 国外流量
 - RULE-SET,rule-provider_domain,🛸 IP归属地伪装
 - RULE-SET,rule-provider_ipcidr,🛸 IP归属地伪装
+- RULE-SET,rule-provider_other,🛸 IP归属地伪装
 - RULE-SET,ZhihuAds_domain,🛑 广告拦截
 - RULE-SET,ZhihuAds_ipcidr,🛑 广告拦截
 - RULE-SET,YouTube_domain,📹 YouTube
 - RULE-SET,YouTube_ipcidr,📹 YouTube
+- RULE-SET,YouTube_other,📹 YouTube
 - RULE-SET,Netflix_domain,🎥 Netflix
 - RULE-SET,Netflix_other,🎥 Netflix
 - RULE-SET,Disney_domain,🐹 DisneyPlus
@@ -52,6 +63,7 @@ Generated at: 2026-09-09 05:40:02+00:00
 - RULE-SET,HBO_domain,🎦 HBO
 - RULE-SET,HBO_other,🎦 HBO
 - RULE-SET,HBOAsia_domain,🎦 HBO
+- RULE-SET,HBOAsia_other,🎦 HBO
 - RULE-SET,HBOUSA_domain,🎦 HBO
 - RULE-SET,HBOUSA_other,🎦 HBO
 - RULE-SET,AppleTV_domain,🍎 AppleTV
@@ -83,7 +95,6 @@ Generated at: 2026-09-09 05:40:02+00:00
 - RULE-SET,OneDrive_other,Ⓜ️ 微软云盘
 - RULE-SET,Microsoft_domain,Ⓜ️ 微软服务
 - RULE-SET,Microsoft_other,Ⓜ️ 微软服务
-- RULE-SET,Apple_domain,🍎 苹果服务
 - RULE-SET,Apple_ipcidr,🍎 苹果服务
 - RULE-SET,Apple_other,🍎 苹果服务
 - RULE-SET,Telegram_domain,📲 Telegram
@@ -92,10 +103,13 @@ Generated at: 2026-09-09 05:40:02+00:00
 - RULE-SET,Discord_domain,🤖 Discord
 - RULE-SET,Game_domain,🎮 游戏平台
 - RULE-SET,Game_ipcidr,🎮 游戏平台
+- RULE-SET,Game_other,🎮 游戏平台
 - RULE-SET,ProxyGFWlist_domain,🚀 国外流量
 - RULE-SET,ProxyGFWlist_ipcidr,🚀 国外流量
+- RULE-SET,ProxyGFWlist_other,🚀 国外流量
 - RULE-SET,ChinaDomain_domain,🎯 国内流量
 - RULE-SET,ChinaDomain_ipcidr,🎯 国内流量
+- RULE-SET,ChinaDomain_other,🎯 国内流量
 - RULE-SET,ChinaCompanyIp_ipcidr,🎯 国内流量
 - RULE-SET,Download_domain,🎯 国内流量
 - RULE-SET,Download_other,🎯 国内流量
