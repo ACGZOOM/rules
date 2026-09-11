@@ -1,6 +1,6 @@
 # MRS Ruleset Links (Always Latest)
 
-Generated at: 2026-09-11 05:20:21+00:00
+Generated at: 2026-09-11 05:59:15+00:00
 
 ```yaml
 - RULE-SET,fakeip-filter_domain,⚡ 绕过
@@ -13,13 +13,8 @@ Generated at: 2026-09-11 05:20:21+00:00
 - RULE-SET,BanProgramAD_ipcidr,🕳️ 黑洞
 - RULE-SET,BanProgramAD_other,🕳️ 黑洞
 - RULE-SET,SteamRegionCheck_domain,🖥️ Steam
-- RULE-SET,Qobuz_domain,🎧 MusicStreaming
-- RULE-SET,YouTubeMusic_domain,🎧 MusicStreaming
-- RULE-SET,JOOX_domain,🎧 MusicStreaming
-- RULE-SET,JOOX_other,🎧 MusicStreaming
 - RULE-SET,CustomlDirect_domain,⚡ 绕过
 - RULE-SET,SwitchProxy_domain,🐬 切换代理
-- RULE-SET,SwitchProxy_other,🐬 切换代理
 - RULE-SET,SpecialProxy_domain,✨ 特殊代理
 - RULE-SET,CustomProxy_domain,🚁 自用代理
 - RULE-SET,ProxyMedia_domain,▶️ ProxyMedia
