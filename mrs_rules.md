@@ -1,6 +1,6 @@
 # MRS Ruleset Links (Always Latest)
 
-Generated at: 2026-09-11 06:05:31+00:00
+Generated at: 2026-09-12 05:11:01+00:00
 
 ```yaml
 - RULE-SET,fakeip-filter_domain,⚡ 绕过
