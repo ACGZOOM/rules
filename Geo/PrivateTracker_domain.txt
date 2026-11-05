@@ -102,7 +102,6 @@ DOMAIN,sync.leniter.org
 DOMAIN,t.213891.xyz
 DOMAIN,t.audiences.me
 DOMAIN,t.et8.org
-DOMAIN,t.hddolby.com
 DOMAIN,t.hdhome.org
 DOMAIN,t.jaekr.sh
 DOMAIN,t.myaltbox.com
@@ -291,7 +290,7 @@ DOMAIN,www.hd.ai
 DOMAIN,www.hdarea.club
 DOMAIN,www.hdbits.org
 DOMAIN,www.hd-cztorrent.cz
-DOMAIN,www.hddolby.com
+DOMAIN,www.uhddolby.com
 DOMAIN,www.hdkyl.in
 DOMAIN,www.hdkylin.top
 DOMAIN,www.hd-torrents.org
@@ -764,7 +763,7 @@ DOMAIN-SUFFIX,hdchina.org
 DOMAIN-SUFFIX,hdcity.city
 DOMAIN-SUFFIX,hdclone.top
 DOMAIN-SUFFIX,hd-cztorrent.cz
-DOMAIN-SUFFIX,hddolby.com
+DOMAIN-SUFFIX,uhddolby.com
 DOMAIN-SUFFIX,hdf.world
 DOMAIN-SUFFIX,hdfans.org
 DOMAIN-SUFFIX,hdfun.me
