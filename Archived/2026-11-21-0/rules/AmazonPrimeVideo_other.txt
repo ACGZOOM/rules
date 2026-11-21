@@ -1,0 +1,2 @@
+DOMAIN-KEYWORD,avoddashs
+PROCESS-NAME,com.amazon.avod.thirdpartyclient
