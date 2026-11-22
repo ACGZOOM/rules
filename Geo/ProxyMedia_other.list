@@ -1,6 +1,3 @@
-DOMAIN-KEYWORD,anthropic
-DOMAIN-KEYWORD,claude
-DOMAIN-KEYWORD,openai
 DOMAIN-KEYWORD,abematv.akamaized.net
 DOMAIN-KEYWORD,avoddashs
 URL-REGEX,^https?:\/\/www\.amazon\.com\/(Amazon-Video|gp\/video)\/
@@ -18,7 +15,6 @@ DOMAIN-KEYWORD,dualstack.apiproxy-
 DOMAIN-KEYWORD,netflixdnstest
 DOMAIN-KEYWORD,nivod
 DOMAIN-KEYWORD,olevod
-DOMAIN-KEYWORD,openai
 DOMAIN-KEYWORD,-spotify-
 DOMAIN-KEYWORD,spotify.com
 DOMAIN-KEYWORD,tiktokcdn
