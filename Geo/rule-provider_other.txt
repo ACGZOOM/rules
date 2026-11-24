@@ -11,4 +11,5 @@ DOMAIN-KEYWORD,-core-c-hl
 DOMAIN-KEYWORD,-normal-lf
 DOMAIN-KEYWORD,-normal-c-lf
 DOMAIN-KEYWORD,-core-c-lf
+DOMAIN-KEYWORD,rednote
 DOMAIN-KEYWORD,xiaohongshu
